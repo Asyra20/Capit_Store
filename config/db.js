@@ -15,7 +15,7 @@ async function connDB() {
             bufferCommands:false
         }
 
-        cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/quickcart`,opts).then( mongoose => {
+        cached.promise = mongoose.connect(`${process.env.MONGODB_URI}/capitstore`,opts).then( mongoose => {
             return mongoose
         })
     }
