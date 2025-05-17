@@ -13,7 +13,7 @@ const AddProduct = () => {
   const [files, setFiles] = useState([]);
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
-  const [category, setCategory] = useState('Earphone');
+  const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
 
@@ -36,7 +36,7 @@ const AddProduct = () => {
         setFiles([]);
         setName('');
         setDescription('');
-        setCategory('Earphone');
+        setCategory('');
         setPrice('');
         setOfferPrice('');
       } else {
@@ -117,6 +117,7 @@ const AddProduct = () => {
               onChange={(e) => setCategory(e.target.value)}
               defaultValue={category}
             >
+              <option value="" disabled hidden>-- Pilih --</option>
               <option value="Sandal Jepit">Sandal Jepit</option>
               <option value="Sandal Slide">Sandal Slide</option>
               <option value="Sandal Gunung">Sandal Gunung</option>

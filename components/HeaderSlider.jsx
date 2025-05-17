@@ -14,7 +14,7 @@ const HeaderSlider = () => {
       buttonText1: "Buy now",
       buttonText2: "Find more",
       imgSrc: assets.header_pink_crocs,
-      link: "/product/", 
+      link: "/product/6828c37d7637f1c37ded36ac", 
     },
     {
       id: 2,
@@ -23,7 +23,7 @@ const HeaderSlider = () => {
       buttonText1: "Shop Now",
       buttonText2: "Explore Deals",
       imgSrc: assets.header_blue_flop,
-      link: "/product/",
+      link: "/product/6828c3177637f1c37ded36a4",
     },
     {
       id: 3,
@@ -32,7 +32,7 @@ const HeaderSlider = () => {
       buttonText1: "Order Now",
       buttonText2: "Learn More",
       imgSrc: assets.header_pink_swallow,
-      link: "/product/",
+      link: "/product/6828c3d07637f1c37ded36b0",
     },
     {
       id: 4,
@@ -41,7 +41,7 @@ const HeaderSlider = () => {
       buttonText1: "Order Now",
       buttonText2: "Learn More",
       imgSrc: assets.header_lurad_sandal,
-      link: "/product/",
+      link: "/product/6828c4287637f1c37ded36b4",
     },
     {
       id: 5,
@@ -50,7 +50,7 @@ const HeaderSlider = () => {
       buttonText1: "Order Now",
       buttonText2: "Learn More",
       imgSrc: assets.header_swallow_ndaweg,
-      link: "/product/",
+      link: "/product/6828c4a87637f1c37ded36b8",
     },
   ];
 
