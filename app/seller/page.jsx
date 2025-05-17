@@ -120,9 +120,8 @@ const AddProduct = () => {
               <option value="Sandal Jepit">Sandal Jepit</option>
               <option value="Sandal Slide">Sandal Slide</option>
               <option value="Sandal Gunung">Sandal Gunung</option>
-              <option value="Sandal Gladiator">Sandal Gladiator</option>
               <option value="Sandal Platform">Sandal Platform</option>
-              <option value="Sandal Wedges">Sandal Wedges</option>
+              <option value="Sandal Heels">Sandal Heels</option>
             </select>
           </div>
           <div className="flex flex-col gap-1 w-32">
