@@ -14,6 +14,16 @@ const ProductList = () => {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  const [showModal, setShowModal] = useState(false);
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [formData, setFormData] = useState({
+    name: '',
+    description: '',
+    category: '',
+    price: '',
+    offerPrice: '',
+  });
+
   const fetchSellerProduct = async () => {
     try {
       const token = await getToken();
@@ -31,24 +41,55 @@ const ProductList = () => {
     }
   };
 
-  const handleDelete = async (id) => {
-    const confirmDelete = confirm("Yakin ingin menghapus produk ini?");
-    if (!confirmDelete) return;
+  const handleEditClick = (product) => {
+    setSelectedProduct(product);
+    setFormData({
+      name: product.name,
+      description: product.description,
+      category: product.category,
+      price: product.price,
+      offerPrice: product.offerPrice,
+    });
+    setShowModal(true);
+  };
 
+  const handleEditSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const token = await getToken();
+      const { data } = await axios.put(`/api/product/${selectedProduct._id}`, formData, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      if (data.success) {
+        toast.success("Produk berhasil diupdate");
+        setShowModal(false);
+        fetchSellerProduct();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (err) {
+      toast.error(err.message);
+    }
+  };
+
+  const handleDelete = async (id) => {
+    const confirm = window.confirm("Yakin ingin menghapus produk ini?");
+    if (!confirm) return;
     try {
       const token = await getToken();
       const { data } = await axios.delete(`/api/product/${id}`, {
         headers: { Authorization: `Bearer ${token}` }
       });
-
       if (data.success) {
-        toast.success("Produk berhasil dihapus");
-        setProducts(prev => prev.filter(p => p._id !== id));
+        toast.success("Produk berhasil dihapus!");
+        fetchSellerProduct();
       } else {
-        toast.error(data.message);
+        toast.error(data.message || "Gagal menghapus produk.");
       }
-    } catch (err) {
-      toast.error("Gagal menghapus produk");
+    } catch (error) {
+      toast.error("Terjadi kesalahan saat menghapus produk.");
     }
   };
 
@@ -60,9 +101,7 @@ const ProductList = () => {
 
   return (
     <div className="flex-1 min-h-screen flex flex-col justify-between">
-      {loading ? (
-        <Loading />
-      ) : (
+      {loading ? <Loading /> : (
         <div className="w-full md:p-10 p-4">
           <h2 className="pb-4 text-lg font-medium">All Product</h2>
           <div className="flex flex-col items-center max-w-4xl w-full overflow-hidden rounded-md bg-white border border-gray-500/20">
@@ -88,22 +127,26 @@ const ProductList = () => {
                           height={720}
                         />
                       </div>
-                      <span className="truncate w-full">
-                        {product.name}
-                      </span>
+                      <span className="truncate w-full">{product.name}</span>
                     </td>
                     <td className="px-4 py-3 max-sm:hidden">{product.category}</td>
                     <td className="px-4 py-3">Rp.{product.offerPrice}</td>
-                    <td className="px-4 py-3 max-sm:hidden space-x-2">
+                    <td className="px-4 py-3 max-sm:hidden flex gap-2">
                       <button
-                        onClick={() => router.push(`/product/${product._id}`)}
-                        className="px-2 py-1 bg-blue-600 text-white text-xs rounded-md"
+                        onClick={() => handleEditClick(product)}
+                        className="px-2 py-1 bg-blue-600 text-white rounded-md"
                       >
                         Edit
                       </button>
                       <button
+                        onClick={() => router.push(`/product/${product._id}`)}
+                        className="px-2 py-1 bg-orange-600 text-white rounded-md"
+                      >
+                        Visit
+                      </button>
+                      <button
                         onClick={() => handleDelete(product._id)}
-                        className="px-2 py-1 bg-red-600 text-white text-xs rounded-md"
+                        className="px-2 py-1 bg-red-600 text-white rounded-md"
                       >
                         Delete
                       </button>
@@ -115,6 +158,89 @@ const ProductList = () => {
           </div>
         </div>
       )}
+
+      {/* Modal Edit Product */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+          <div className="bg-white p-6 rounded-lg w-[90%] max-w-lg shadow-xl">
+            <h3 className="text-lg font-semibold mb-4">Edit Product</h3>
+            <form onSubmit={handleEditSubmit} className="space-y-4">
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Product Name</label>
+                <input
+                  type="text"
+                  value={formData.name}
+                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                  className="w-full px-3 py-2 border rounded"
+                  required
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Description</label>
+                <textarea
+                  rows={3}
+                  value={formData.description}
+                  onChange={(e) => setFormData({ ...formData, description: e.target.value })}
+                  className="w-full px-3 py-2 border rounded resize-none"
+                  required
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Category</label>
+                <select
+                  value={formData.category}
+                  onChange={(e) => setFormData({ ...formData, category: e.target.value })}
+                  className="w-full px-3 py-2 border rounded"
+                  required
+                >
+                  <option value="" disabled hidden>-- Pilih --</option>
+                  <option value="Sandal Jepit">Sandal Jepit</option>
+                  <option value="Sandal Slide">Sandal Slide</option>
+                  <option value="Sandal Gunung">Sandal Gunung</option>
+                  <option value="Sandal Platform">Sandal Platform</option>
+                  <option value="Sandal Heels">Sandal Heels</option>
+                </select>
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Price</label>
+                <input
+                  type="number"
+                  value={formData.price}
+                  onChange={(e) => setFormData({ ...formData, price: e.target.value })}
+                  className="w-full px-3 py-2 border rounded"
+                  required
+                />
+              </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Offer Price</label>
+                <input
+                  type="number"
+                  value={formData.offerPrice}
+                  onChange={(e) => setFormData({ ...formData, offerPrice: e.target.value })}
+                  className="w-full px-3 py-2 border rounded"
+                  required
+                />
+              </div>
+              <div className="flex justify-end gap-2 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowModal(false)}
+                  className="px-4 py-2 bg-gray-300 text-gray-800 rounded-md"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-4 py-2 bg-blue-600 text-white rounded-md"
+                >
+                  Save
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
+
       <Footer />
     </div>
   );

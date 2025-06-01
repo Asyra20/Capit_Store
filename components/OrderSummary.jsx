@@ -28,7 +28,7 @@ const OrderSummary = () => {
       });
       if (data.success) {
         setUserAddresses(data.address);
-        if (data.address.lenght > 0) {
+        if (data.address.length > 0) {
           setSelectedAddress(data.addresses[0]);
         }
       } else {
