@@ -23,7 +23,7 @@ const HeaderSlider = () => {
       buttonText1: "Shop Now",
       buttonText2: "Explore Deals",
       imgSrc: assets.header_blue_flop,
-      link: "/product/6828c3177637f1c37ded36a4",
+      link: "/product/682c2ce78da73f37929755b7",
     },
     {
       id: 3,
