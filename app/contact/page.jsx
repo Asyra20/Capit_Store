@@ -51,15 +51,15 @@ const ContactUs = () => {
             <Navbar />
             <div className="px-6 md:px-16 lg:px-32 pt-14 pb-20">
                 <div className="text-center mb-12">
-                    <h1 className="text-3xl font-semibold text-gray-800">Contact <span className="text-orange-600">Us</span></h1>
-                    <p className="text-gray-600 mt-2">We'd love to hear from you. Please reach out with any questions or feedback.</p>
-                    <div className="w-24 h-0.5 bg-orange-600 mx-auto mt-2"></div>
+                    <h1 className="text-3xl font-semibold text-gray-50">Contact <span className="text-sky-400">Us</span></h1>
+                    <p className="text-gray-100 mt-2">We'd love to hear from you. Please reach out with any questions or feedback.</p>
+                    <div className="w-24 h-0.5 bg-sky-400 mx-auto mt-2"></div>
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
                     <form onSubmit={handleSubmit} className="space-y-6">
                         <div>
-                            <label className="block text-gray-700 mb-1">Name</label>
+                            <label className="block text-gray-100 mb-1">Name</label>
                             <input
                                 type="text"
                                 name="name"
@@ -70,7 +70,7 @@ const ContactUs = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-1">Email</label>
+                            <label className="block text-gray-100 mb-1">Email</label>
                             <input
                                 type="email"
                                 name="email"
@@ -81,7 +81,7 @@ const ContactUs = () => {
                             />
                         </div>
                         <div>
-                            <label className="block text-gray-700 mb-1">Message</label>
+                            <label className="block text-gray-100 mb-1">Message</label>
                             <textarea
                                 name="message"
                                 value={formData.message}
@@ -93,7 +93,7 @@ const ContactUs = () => {
                         </div>
                         <button
                             type="submit"
-                            className="bg-orange-500 text-white px-6 py-2 rounded-md hover:bg-orange-600 transition"
+                            className="bg-sky-500 text-white px-6 py-2 rounded-md hover:bg-gray-50 hover:text-slate-950 transition"
                         >
                             Send Message
                         </button>
@@ -102,24 +102,24 @@ const ContactUs = () => {
 
                     <div className="flex flex-col justify-center text-gray-700 space-y-6">
                         <div className="flex items-start gap-4">
-                            <MapPin className="text-orange-600 mt-1" />
+                            <MapPin className="text-sky-400 mt-1" />
                             <div>
-                                <h3 className="text-lg font-semibold">Address</h3>
-                                <p>Universitas Amikom Purwokerto, Jl. Letjend Pol. Soemarto No.126, Watumas</p>
+                                <h3 className="text-lg font-semibold text-gray-200">Address</h3>
+                                <p className="text-gray-300">Universitas Amikom Purwokerto, Jl. Letjend Pol. Soemarto No.126, Watumas</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
-                            <Mail className="text-orange-600 mt-1" />
+                            <Mail className="text-sky-400 mt-1" />
                             <div>
-                                <h3 className="text-lg font-semibold">Email</h3>
-                                <p>ndawegstudio@gmail.com</p>
+                                <h3 className="text-lg font-semibold text-gray-200">Email</h3>
+                                <p className="text-gray-300">ndawegstudio@gmail.com</p>
                             </div>
                         </div>
                         <div className="flex items-start gap-4">
-                            <Phone className="text-orange-600 mt-1" />
+                            <Phone className="text-sky-400 mt-1" />
                             <div>
-                                <h3 className="text-lg font-semibold">Phone</h3>
-                                <p>+62 8123456789</p>
+                                <h3 className="text-lg font-semibold text-gray-200">Phone</h3>
+                                <p className="text-gray-300">+62 8123456789</p>
                             </div>
                         </div>
                         <div className="mt-8">

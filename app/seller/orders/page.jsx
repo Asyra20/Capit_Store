@@ -8,6 +8,7 @@ import Loading from "@/components/Loading";
 import axios from "axios";
 import toast from "react-hot-toast";
 
+
 const Orders = () => {
 
     const { currency, getToken, user } = useAppContext();
@@ -39,8 +40,8 @@ const Orders = () => {
     return (
         <div className="flex-1 h-screen overflow-scroll flex flex-col justify-between text-sm">
             {loading ? <Loading /> : <div className="md:p-10 p-4 space-y-5">
-                <h2 className="text-lg font-medium">Orders</h2>
-                <div className="max-w-4xl rounded-md">
+                <h2 className="text-lg font-medium text-gray-100">Orders</h2>
+                <div className="max-w-4xl rounded-md text-gray-100">
                     {orders.map((order, index) => (
                         <div key={index} className="flex flex-col md:flex-row gap-5 justify-between p-5 border-t border-gray-300">
                             <div className="flex-1 flex gap-5 max-w-80">

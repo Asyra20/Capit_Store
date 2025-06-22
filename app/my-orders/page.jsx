@@ -42,7 +42,7 @@ const MyOrders = () => {
             <Navbar />
             <div className="flex flex-col justify-between px-6 md:px-16 lg:px-32 py-6 min-h-screen">
                 <div className="space-y-5">
-                    <h2 className="text-lg font-medium mt-6">My Orders</h2>
+                    <h2 className="text-lg font-medium mt-6 text-gray-50">My Orders</h2>
                     {loading ? <Loading /> : (<div className="max-w-5xl border-t border-gray-300 text-sm">
                         {orders.map((order, index) => (
                             <div key={index} className="flex flex-col md:flex-row gap-5 justify-between p-5 border-b border-gray-300">
@@ -52,7 +52,7 @@ const MyOrders = () => {
                                         src={assets.box_icon}
                                         alt="box_icon"
                                     />
-                                    <p className="flex flex-col gap-3">
+                                    <p className="flex flex-col gap-3 text-gray-50">
                                         <span className="font-medium text-base">
                                             {order.items.map((item) => item.product.name + ` x ${item.quantity}`).join(", ")}
                                         </span>
@@ -60,20 +60,20 @@ const MyOrders = () => {
                                     </p>
                                 </div>
                                 <div>
-                                    <p>
-                                        <span className="font-medium">{order.address.fullName}</span>
+                                    <p> 
+                                        <span className="font-medium text-gray-50">{order.address.fullName}</span>
                                         <br />
-                                        <span >{order.address.area}</span>
+                                        <span className="text-gray-50">{order.address.area}</span>
                                         <br />
-                                        <span>{`${order.address.city}, ${order.address.state}`}</span>
+                                        <span className="text-gray-50">{`${order.address.city}, ${order.address.state}`}</span>
                                         <br />
-                                        <span>{order.address.phoneNumber}</span>
+                                        <span className="text-gray-50">{order.address.phoneNumber}</span>
                                     </p>
                                 </div>
-                                <p className="font-medium my-auto">{currency}{order.amount}</p>
+                                <p className="font-medium my-auto text-gray-50">{currency}{order.amount}</p>
                                 <div>
-                                    <p className="flex flex-col">
-                                        <span>Method : COD</span>
+                                    <p className="flex flex-col text-gray-50">
+                                        <span >Method : COD</span>
                                         <span>Date : {new Date(order.date).toLocaleDateString()}</span>
                                         <span>Payment : Pending</span>
                                     </p>

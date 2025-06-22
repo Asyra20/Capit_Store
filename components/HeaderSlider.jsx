@@ -78,21 +78,21 @@ const HeaderSlider = () => {
         {sliderData.map((slide, index) => (
           <div
             key={slide.id}
-            className="flex flex-col-reverse md:flex-row items-center justify-between bg-[#E6E9F2] py-8 md:px-14 px-5 mt-6 rounded-xl min-w-full"
+            className="flex flex-col-reverse md:flex-row items-center justify-between bg-slate-800 py-8 md:px-14 px-5 mt-6 rounded-xl min-w-full"
           >
             <div className="md:pl-8 mt-10 md:mt-0">
-              <p className="md:text-base text-orange-600 pb-1">{slide.offer}</p>
-              <h1 className="max-w-lg md:text-[40px] md:leading-[48px] text-2xl font-semibold">
+              <p className="md:text-base text-slate-300 pb-1">{slide.offer}</p>
+              <h1 className="max-w-lg md:text-[40px] md:leading-[48px] text-gray-50 font-semibold">
                 {slide.title}
               </h1>
               <div className="flex items-center mt-4 md:mt-6 ">
                 <button
                   onClick={() => router.push(slide.link || "/")}  
-                  className="md:px-10 px-7 md:py-2.5 py-2 bg-orange-600 rounded-full text-white font-medium"
+                  className="md:px-10 px-7 md:py-2.5 py-2 bg-sky-600 text-white rounded-full font-medium hover:bg-white hover:text-black transition"
                 >
                   {slide.buttonText1}
                 </button>
-                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium">
+                <button className="group flex items-center gap-2 px-6 py-2.5 font-medium text-gray-500">
                   {slide.buttonText2}
                   <Image
                     className="group-hover:translate-x-1 transition"
@@ -119,7 +119,7 @@ const HeaderSlider = () => {
             key={index}
             onClick={() => handleSlideChange(index)}
             className={`h-2 w-2 rounded-full cursor-pointer ${
-              currentSlide === index ? "bg-orange-600" : "bg-gray-500/30"
+              currentSlide === index ? "bg-gray-50" : "bg-gray-500/30"
             }`}
           ></div>
         ))}

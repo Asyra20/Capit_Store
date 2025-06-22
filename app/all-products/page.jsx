@@ -3,7 +3,7 @@ import ProductCard from "@/components/ProductCard";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import { useAppContext } from "@/context/AppContext";
-
+import { motion } from "framer-motion";
 const AllProducts = () => {
 
     const { products } = useAppContext();
