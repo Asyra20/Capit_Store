@@ -14,7 +14,7 @@
     "axios": "^1.9.0",
     "cloudinary": "^2.6.1",
     "emailjs-com": "^3.2.0",
-    "framer-motion": "^12.18.1",
+    "framer-motion": "^12.19.1",
     "inngest": "^3.35.1",
     "lucide-react": "^0.511.0",
     "mongodb": "^6.16.0",

@@ -75,7 +75,7 @@ const MyOrders = () => {
                                     <p className="flex flex-col text-gray-50">
                                         <span >Method : COD</span>
                                         <span>Date : {new Date(order.date).toLocaleDateString()}</span>
-                                        <span>Payment : Pending</span>
+                                        <span>No Admin Kurir : 08123123412</span>
                                     </p>
                                 </div>
                             </div>

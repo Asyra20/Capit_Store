@@ -22,6 +22,7 @@ const ProductList = () => {
     category: '',
     price: '',
     offerPrice: '',
+    stock: '',
   });
 
   const fetchSellerProduct = async () => {
@@ -49,6 +50,7 @@ const ProductList = () => {
       category: product.category,
       price: product.price,
       offerPrice: product.offerPrice,
+      stock: product.stock,
     });
     setShowModal(true);
   };
@@ -221,6 +223,17 @@ const ProductList = () => {
                   required
                 />
               </div>
+              <div className="flex flex-col gap-1">
+                <label className="text-base font-medium">Stock</label>
+                <input
+                  type="number"
+                  value={formData.stock}
+                  onChange={(e) => setFormData({ ...formData, stock: e.target.value })}
+                  className="w-full px-3 py-2 border rounded"
+                  required
+                />
+              </div>
+
               <div className="flex justify-end gap-2 pt-4">
                 <button
                   type="button"

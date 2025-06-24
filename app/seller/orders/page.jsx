@@ -73,6 +73,7 @@ const Orders = () => {
                                 <p className="flex flex-col">
                                     <span>Method : COD</span>
                                     <span>Date : {new Date(order.date).toLocaleDateString()}</span>
+                                    <span>No Pembeli : 0813213211</span>
                                 </p>
                             </div>
                         </div>

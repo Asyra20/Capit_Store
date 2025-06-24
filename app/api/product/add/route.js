@@ -8,62 +8,74 @@ import Product from "@/models/Product";
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
     api_key: process.env.CLOUDINARY_API_KEY,
-    api_secret: process.env.CLOUDINARY_API_SECRET
-})
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 export async function POST(request) {
     try {
-        const {userId} = getAuth(request)
-        const isSeller = await authSeller(userId)
-        if(!isSeller){
-            return NextResponse.json({success: false, messsage: 'not authorized'})
+        const { userId } = getAuth(request);
+        const isSeller = await authSeller(userId);
+        if (!isSeller) {
+            return NextResponse.json({ success: false, message: "Not authorized" });
         }
-        const formData = await request.formData()
-        const name = formData.get('name');
-        const description = formData.get('description');
-        const category = formData.get('category');
-        const price = formData.get('price');
-        const offerPrice = formData.get('offerPrice');
 
-        const files = formData.getAll('images');
+        const formData = await request.formData();
+        const name = formData.get("name");
+        const description = formData.get("description");
+        const category = formData.get("category");
+        const price = Number(formData.get("price"));
+        const offerPrice = Number(formData.get("offerPrice"));
+        const stock = Number(formData.get("stock")); // ✅ Ambil dan konversi ke number
+
+        const files = formData.getAll("images");
 
         if (!files || files.length === 0) {
-            return NextResponse.json({success: false, messsage: 'no files uploaded'})
+            return NextResponse.json({ success: false, message: "No files uploaded" });
         }
+
         const result = await Promise.all(
-            files.map(async (file)=>{
-                const arrayBuffer = await file.arrayBuffer()
-                const buffer = Buffer.from(arrayBuffer)
-                return new Promise((resolve, reject)=>{
+            files.map(async (file) => {
+                const arrayBuffer = await file.arrayBuffer();
+                const buffer = Buffer.from(arrayBuffer);
+                return new Promise((resolve, reject) => {
                     const stream = cloudinary.uploader.upload_stream(
-                        {resource_type: 'auto'},
+                        { resource_type: "auto" },
                         (error, result) => {
-                            if(error){
-                                reject(error)
+                            if (error) {
+                                reject(error);
                             } else {
-                                resolve(result)
+                                resolve(result);
                             }
                         }
-                    )
-                    stream.end(buffer)
-                })
+                    );
+                    stream.end(buffer);
+                });
             })
-        )
-        const image = result.map(result => result.secure_url)
-        await connDB()
+        );
+
+        const image = result.map((r) => r.secure_url);
+
+        await connDB();
+
         const newProduct = await Product.create({
             userId,
             name,
             description,
             category,
-            price:Number(price),
-            offerPrice:Number(offerPrice),
+            price,
+            offerPrice,
+            stock,         // ✅ Tambahkan stok
             image,
-            date: Date.now()
-        })
-        return NextResponse.json({ success: true, messsage: 'Upload successful', newProduct})
+            date: Date.now(),
+        });
 
+        return NextResponse.json({
+            success: true,
+            message: "Upload successful",
+            newProduct,
+        });
     } catch (error) {
-        NextResponse.json({success: false, messsage: error.messsage})
+        console.error(error);
+        return NextResponse.json({ success: false, message: error.message });
     }
 }

@@ -16,6 +16,7 @@ const AddProduct = () => {
   const [category, setCategory] = useState('');
   const [price, setPrice] = useState('');
   const [offerPrice, setOfferPrice] = useState('');
+  const [stock, setStock] = useState('');
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -25,27 +26,30 @@ const AddProduct = () => {
     formData.append('category', category)
     formData.append('price', price)
     formData.append('offerPrice', offerPrice)
+    formData.append('stock', stock)
+
 
     for (let i = 0; i < files.length; i++) {
       formData.append('images', files[i])
     }
     try {
       const token = await getToken()
-      const {data} =await axios.post('/api/product/add',formData,{headers:{Authorization:`Bearer ${token}`}})
-      if (data.success){
+      const { data } = await axios.post('/api/product/add', formData, { headers: { Authorization: `Bearer ${token}` } })
+      if (data.success) {
         setFiles([]);
         setName('');
         setDescription('');
         setCategory('');
         setPrice('');
         setOfferPrice('');
+        setStock('');
       } else {
         toast.error(data.message)
       }
     } catch (error) {
       toast.error(error.message)
     }
-    
+
   };
 
   return (
@@ -153,6 +157,21 @@ const AddProduct = () => {
               required
             />
           </div>
+          <div className="flex flex-col gap-1 w-32">
+            <label className="text-base font-medium text-gray-50" htmlFor="stock">
+              Stock
+            </label>
+            <input
+              id="stock"
+              type="number"
+              placeholder="0"
+              className="outline-none md:py-2.5 py-2 px-3 rounded border border-gray-500/40"
+              onChange={(e) => setStock(e.target.value)}
+              value={stock}
+              required
+            />
+          </div>
+
         </div>
         <button type="submit" className="px-8 py-2.5 bg-sky-400 text-white hover:bg-white hover:text-gray-800 transition font-medium rounded">
           ADD
